@@ -49,6 +49,7 @@ _PROFILE_OPTS = [
                     'mariadb',
                     'memcached',
                     'mongodb',
+                    'opendaylight',
                     'openvswitch',
                     'rabbitmq',
                     'redis',
@@ -769,6 +770,10 @@ USERS = {
     'redis-user': {
         'uid': 42460,
         'gid': 42460,
+    },
+    'opendaylight-user': {
+        'uid': 42462,
+        'gid': 42462,
     },
 }
 
