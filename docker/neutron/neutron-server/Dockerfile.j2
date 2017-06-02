@@ -33,6 +33,18 @@ RUN chmod 755 /usr/local/bin/kolla_neutron_extend_start \
            pip --no-cache-dir install --upgrade -c requirements/upper-constraints.txt /plugins/*; \
        fi
 
+{% if install_type == 'binary' %}
+    {% if base_distro in ['centos', 'oraclelinux', 'rhel'] %}
+      {% set plugin_packages = ['python-networking-odl'] %}
+
+      {% if plugin_packages_repo is not defined %}
+        {% set plugin_packages_repo = 'networking-odl.repo' %}
+      {% endif %}
+COPY {{ plugin_packages_repo }} /etc/yum.repos.d/
+{{ macros.install_packages(plugin_packages | customizable("packages")) }}
+    {% endif %}
+{% endif %}
+
 {% block neutron_server_footer %}{% endblock %}
 {% block footer %}{% endblock %}
 

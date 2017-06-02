@@ -1,0 +1,5 @@
+[neutron-plugin]
+name=CentOS CBS OpenStack Release Repository
+baseurl=http://cbs.centos.org/repos/cloud7-openstack-ocata-release/$basearch/os/
+enabled=1
+gpgcheck=0
