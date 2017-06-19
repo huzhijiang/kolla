@@ -771,7 +771,7 @@ USERS = {
         'uid': 42460,
         'gid': 42460,
     },
-    'opendaylight-user': {
+    'odl-user': {
         'uid': 42462,
         'gid': 42462,
     },

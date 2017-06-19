@@ -5,7 +5,7 @@ MAINTAINER {{ maintainer }}
 
 {% import "macros.j2" as macros with context %}
 
-{{ macros.configure_user(name='opendaylight') }}
+{{ macros.configure_user(name='odl') }}
 
 {% if install_type == 'binary' %}
     {% set opendaylight_packages = ['opendaylight'] %}
