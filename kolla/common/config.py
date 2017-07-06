@@ -449,6 +449,10 @@ SOURCES = {
         'type': 'url',
         'location': ('$tarballs_base/neutron-lbaas/'
                      'neutron-lbaas-10.0.0.tar.gz')},
+    'neutron-server-plugin-networking-odl': {
+        'type': 'url',
+        'location': ('$tarballs_base/networking-odl/'
+                     'networking-odl-master.tar.gz')},
     'neutron-server-plugin-neutron-lbaas': {
         'type': 'url',
         'location': ('$tarballs_base/neutron-lbaas/'
@@ -473,6 +477,12 @@ SOURCES = {
         'type': 'url',
         'location': ('$tarballs_base/octavia/'
                      'octavia-0.10.0.tar.gz')},
+    'opendaylight': {
+        'type': 'url',
+        'location': ('https://nexus.opendaylight.org/content/'
+                     'repositories/opendaylight.release/org/opendaylight/'
+                     'integration/distribution-karaf/0.5.3-Boron-SR3/'
+                     'distribution-karaf-0.5.3-Boron-SR3.tar.gz')},
     'panko-base': {
         'type': 'url',
         'location': ('$tarballs_base/panko/'
