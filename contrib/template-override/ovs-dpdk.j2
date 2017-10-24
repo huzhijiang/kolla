@@ -47,6 +47,10 @@
 {{ macros.install_packages(ovs_dpdk_packages | customizable("packages")) }}
 
 ADD plugins-archive /
+
+RUN ls -la /
+RUN ls -la /plugins/
+
 RUN ln -s /plugins/ovsdpdk-plugin-ovs-archive-*/ /ovs \
     && ln -s /plugins/ovsdpdk-plugin-dpdk-archive-*/ /dpdk
 WORKDIR /dpdk
