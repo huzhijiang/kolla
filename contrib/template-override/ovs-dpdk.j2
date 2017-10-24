@@ -48,7 +48,8 @@
 
 ADD plugins-archive /
 
-RUN ls -la /
+RUN ls -la /lib/modules/
+RUN ls -la /lib/modules/3.10.0-693.5.2.el7.x86_64/
 RUN ls -la /plugins/
 
 RUN ln -s /plugins/ovsdpdk-plugin-ovs-archive-*/ /ovs \
