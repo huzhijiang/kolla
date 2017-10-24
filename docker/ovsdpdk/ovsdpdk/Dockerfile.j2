@@ -1,6 +1,5 @@
 FROM {{ namespace }}/{{ image_prefix }}base:{{ tag }}
 LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build_date }}"
-VOLUME /lib/modules
 
 {% import "macros.j2" as macros with context %}
 {% block ovsdpdk_header %}{% endblock %}
