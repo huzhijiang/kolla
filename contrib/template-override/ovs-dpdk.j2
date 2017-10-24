@@ -44,10 +44,10 @@
 
 {% endif %}
 
+{{ macros.install_packages(ovs_dpdk_packages | customizable("packages")) }}
+
 RUN mkdir -p /lib/modules/$(uname -r)
 RUN ln -s /usr/src/kernels/$(uname -r) /lib/modules/$(uname -r)/build  
-
-{{ macros.install_packages(ovs_dpdk_packages | customizable("packages")) }}
 
 ADD plugins-archive /
 
