@@ -50,6 +50,7 @@ ADD plugins-archive /
 RUN ln -s /plugins/ovsdpdk-plugin-ovs-archive-*/ /ovs \
     && ln -s /plugins/ovsdpdk-plugin-dpdk-archive-*/ /dpdk
 WORKDIR /dpdk
+RUN ls -la
 {% set RTE_TARGET='x86_64-native-linuxapp-gcc' %}
 RUN make config T="{{ RTE_TARGET }}"
 WORKDIR "/dpdk/build"
