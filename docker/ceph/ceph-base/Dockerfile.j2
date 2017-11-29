@@ -11,8 +11,8 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
 
    {% set ceph_base_packages = [
         'btrfs-progs',
-        'ceph',
-        'ceph-radosgw',
+        'ceph-10.2.7',
+        'ceph-radosgw-10.2.7',
         'e2fsprogs',
         'hdparm',
         'parted',
@@ -21,7 +21,7 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
 
     {% if base_arch in ['aarch64', 'x86_64'] %}
         {% set ceph_base_packages = ceph_base_packages + [
-            'ceph-fuse'
+            'ceph-fuse-10.2.7'
         ] %}
     {% endif %}
 
