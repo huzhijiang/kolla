@@ -15,7 +15,27 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
         'hdparm',
         'parted',
         'xfsprogs',
-        'boost-regex'
+        'boost-regex',
+        'cryptsetup',
+        'boost-iostreams',
+        'boost-random',
+        'boost-system',
+        'boost-thread',
+        'boost-program-options',
+        'lttng-ust',
+        'snappy',
+        'logrotate',
+        'python2-requests',
+        'python2-setuptools',
+        'mailcap',
+        'python-flask',
+        'fuse-libs',
+        'fuse',
+        'gperftools-libs',
+        'gdisk',
+        'libselinux-utils',
+        'policycoreutils',
+        'selinux-policy'
     ] %}
 
 {% elif base_distro in ['debian', 'ubuntu'] %}
