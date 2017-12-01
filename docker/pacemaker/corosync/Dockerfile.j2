@@ -1,0 +1,12 @@
+FROM {{ namespace }}/{{ image_prefix }}pacemaker-base:{{ tag }}
+LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build_date }}"
+
+{% block corosync_header %}{% endblock %}
+
+COPY extend_start.sh /usr/local/bin/kolla_pacemaker_extend_start
+COPY start_corosync.sh /usr/local/bin/start-corosync
+RUN chmod 755 /usr/local/bin/kolla_pacemaker_extend_start && \
+    chmod 755 /usr/local/bin/start-corosync
+
+{% block corosync_footer %}{% endblock %}
+{% block footer %}{% endblock %}
