@@ -11,33 +11,19 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
 
    {% set ceph_base_packages = [
         'btrfs-progs',
+        'ceph',
+        'ceph-radosgw',
         'e2fsprogs',
         'hdparm',
         'parted',
-        'xfsprogs',
-        'boost-regex',
-        'cryptsetup',
-        'boost-iostreams',
-        'boost-random',
-        'boost-system',
-        'boost-thread',
-        'boost-program-options',
-        'lttng-ust',
-        'snappy',
-        'logrotate',
-        'python2-requests',
-        'python2-setuptools',
-        'mailcap',
-        'python-flask',
-        'fuse-libs',
-        'fuse',
-        'gperftools-libs',
-        'gdisk',
-        'libselinux-utils',
-        'policycoreutils',
-        'selinux-policy',
-        'selinux-policy-targeted'
+        'xfsprogs'
     ] %}
+
+    {% if base_arch in ['aarch64', 'x86_64'] %}
+        {% set ceph_base_packages = ceph_base_packages + [
+            'ceph-fuse'
+        ] %}
+    {% endif %}
 
 {% elif base_distro in ['debian', 'ubuntu'] %}
 
@@ -59,9 +45,6 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
 
 {% endif %}
 {{ macros.install_packages(ceph_base_packages | customizable("packages")) }}
-
-
-RUN rpm -ivh http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/ceph-10.2.7-0.el7.x86_64.rpm  http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/ceph-radosgw-10.2.7-0.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/ceph-fuse-10.2.7-0.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/ceph-osd-10.2.7-0.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/ceph-mds-10.2.7-0.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/ceph-mon-10.2.7-0.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/libcephfs1-10.2.7-0.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/python-cephfs-10.2.7-0.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/ceph-common-10.2.7-0.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/ceph-base-10.2.7-0.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/ceph-selinux-10.2.7-0.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/fcgi-2.4.0-25.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/librgw2-10.2.7-0.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/librbd1-10.2.7-0.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/librados2-10.2.7-0.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/python-rbd-10.2.7-0.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/leveldb-1.12.0-5.el7.1.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/libbabeltrace-1.2.4-3.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/babeltrace-1.2.4-3.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/libradosstriper1-10.2.7-0.el7.x86_64.rpm http://mirror.centos.org/centos/7/storage/x86_64/ceph-jewel/python-rados-10.2.7-0.el7.x86_64.rpm
 
 COPY extend_start.sh /usr/local/bin/kolla_extend_start
 RUN chmod 755 /usr/local/bin/kolla_extend_start
