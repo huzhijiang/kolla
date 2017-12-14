@@ -5,7 +5,8 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
 
 COPY extend_start.sh /usr/local/bin/kolla_pacemaker_extend_start
 COPY check_alive.sh /
-RUN chmod 755 /usr/local/bin/kolla_pacemaker_extend_start /check_alive.sh
+COPY dummy_service.sh /
+RUN chmod 755 /usr/local/bin/kolla_pacemaker_extend_start /check_alive.sh /dummy_service.sh
 
 {% block pacemaker_footer %}{% endblock %}
 {% block footer %}{% endblock %}
