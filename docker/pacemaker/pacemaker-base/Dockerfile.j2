@@ -9,8 +9,7 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
     {% set pacemaker_packages = [
         'pacemaker',
         'pcs',
-        'socat',
-        'docker'
+        'socat'
     ] %}
 {% elif base_distro in ['debian', 'ubuntu'] %}
 RUN echo '{{ install_type }} not yet available for {{ base_distro }}' \
@@ -18,6 +17,8 @@ RUN echo '{{ install_type }} not yet available for {{ base_distro }}' \
 {% endif %}
 
 {{ macros.install_packages(pacemaker_packages | customizable("packages")) }}
+
+RUN yum install -y https://yum.dockerproject.org/repo/main/centos/7/Packages/docker-engine-17.05.0.ce-1.el7.centos.x86_64.rpm
 
 COPY extend_start.sh /usr/local/bin/kolla_extend_start
 RUN chmod 755 /usr/local/bin/kolla_extend_start
