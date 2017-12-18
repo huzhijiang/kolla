@@ -9,7 +9,8 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
     {% set pacemaker_packages = [
         'pacemaker',
         'pcs',
-        'socat'
+        'socat',
+        'docker'
     ] %}
 {% elif base_distro in ['debian', 'ubuntu'] %}
 RUN echo '{{ install_type }} not yet available for {{ base_distro }}' \
