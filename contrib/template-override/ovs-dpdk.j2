@@ -74,7 +74,7 @@ WORKDIR "/dpdk/build"
                            "s/CONFIG_RTE_BUILD_SHARED_LIB=.*$/CONFIG_RTE_BUILD_SHARED_LIB=n/"])
 }}
 
-RUN make -j $(nproc) EXTRA_CFLAGS='-O2 -fPIC' \
+RUN make -j $(nproc) EXTRA_CFLAGS='-O2 -fPIC -Wno-maybe-uninitialized' \
     && make install
 WORKDIR /ovs
 RUN ./boot.sh \
