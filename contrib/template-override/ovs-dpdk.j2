@@ -50,16 +50,9 @@ RUN mkdir -p /lib/modules/$(uname -r)
 RUN ln -s /usr/src/kernels/$(uname -r) /lib/modules/$(uname -r)/build  
 
 ADD plugins-archive /
-
-RUN ls -la /lib/modules/
-RUN ls -la /lib/modules/$(uname -r)/
-RUN ls -la /lib/modules/$(uname -r)/build
-RUN ls -la /plugins/
-
 RUN ln -s /plugins/ovsdpdk-plugin-ovs-archive-*/ /ovs \
     && ln -s /plugins/ovsdpdk-plugin-dpdk-archive-*/ /dpdk
 WORKDIR /dpdk
-RUN ls -la
 {% set RTE_TARGET='x86_64-native-linuxapp-gcc' %}
 RUN make config T="{{ RTE_TARGET }}"
 WORKDIR "/dpdk/build"
