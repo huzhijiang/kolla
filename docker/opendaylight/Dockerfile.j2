@@ -8,7 +8,7 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
 {{ macros.configure_user(name='odl') }}
 
 {% block opendaylight_install %}
-RUN yum install -y http://cbs.centos.org/kojifiles/packages/opendaylight/6.3.0/0.1.20171122snap208.el7/noarch/opendaylight-6.3.0-0.1.20171122snap208.el7.noarch.rpm
+RUN yum install -y https://nexus.opendaylight.org/content/repositories/opendaylight-carbon-epel-7-x86_64-devel/org/opendaylight/integration-packaging/opendaylight/6.3.0-0.1.20180108snap438.el7.noarch/opendaylight-6.3.0-0.1.20180108snap438.el7.noarch.rpm
 {% endblock %}
 
 COPY extend_start.sh /usr/local/bin/kolla_extend_start
