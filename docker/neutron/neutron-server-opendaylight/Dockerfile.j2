@@ -9,12 +9,16 @@ USER root
 
 {% if install_type == 'binary' %}
     {% set neutron_server_opendaylight_packages = [
+        'patch',
         'python-networking-odl',
         'python-networking-bgpvpn',
         'python-networking-l2gw'
     ] %}
 
 {{ macros.install_packages(neutron_server_opendaylight_packages | customizable("packages")) }}
+
+# Please see https://review.openstack.org/#/c/533706/
+RUN patch -d /usr/lib/python2.7/site-packages/ -p1 < 0d741cb.diff
 
 {% elif install_type == 'source' %}
 

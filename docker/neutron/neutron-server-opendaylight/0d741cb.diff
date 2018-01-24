@@ -1,0 +1,44 @@
+diff --git a/networking_odl/common/callback.py b/networking_odl/common/callback.py
+index d669d21..d2de1ab 100644
+--- a/networking_odl/common/callback.py
++++ b/networking_odl/common/callback.py
+@@ -19,6 +19,7 @@
+ from neutron_lib.callbacks import registry
+ from neutron_lib.callbacks import resources
+ from oslo_log import log as logging
++from oslo_utils import excutils
+ 
+ from networking_odl.common import constants as odl_const
+ 
+@@ -88,8 +89,15 @@
+ 
+         copy_kwargs = kwargs.copy()
+         copy_kwargs.pop('context')
+-        callback(context, odl_ops, odl_res_type, res_id, odl_res_dict,
+-                 **copy_kwargs)
++        try:
++            callback(context, odl_ops, odl_res_type, res_id, odl_res_dict,
++                     **copy_kwargs)
++        except Exception:
++            # In case of precommit, neutron registry notification caller
++            # doesn't log its exception. In networking-odl case, we don't
++            # normally throw exception. So log it here for debug
++            with excutils.save_and_reraise_exception():
++                LOG.exception("exceptions in callback")
+ 
+     def sg_callback_precommit(self, resource, event, trigger, **kwargs):
+         self._sg_callback(self._precommit, resource, event, trigger, **kwargs)
+diff --git a/networking_odl/db/db.py b/networking_odl/db/db.py
+index 0e62013..9b96a0a 100644
+--- a/networking_odl/db/db.py
++++ b/networking_odl/db/db.py
+@@ -51,7 +51,8 @@
+         models.OpenDaylightJournal.operation == odl_const.ODL_DELETE
+     ).all()
+ 
+-    return (row for row in rows if parent_id in row.data)
++    return (row for row in rows
++            if row.data is not None and parent_id in row.data)
+ 
+ 
+ def get_all_db_rows(session):
