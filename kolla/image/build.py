@@ -99,7 +99,6 @@ SKIPPED_IMAGES = {
         "zun-base",
     ],
     'centos+source': [
-        "ovsdpdk",
         # TODO(jeffrey4l): remove tripleo-ui when following bug is fixed
         # https://bugs.launchpad.net/tripleo/+bug/1744215
         "tripleo-ui"
